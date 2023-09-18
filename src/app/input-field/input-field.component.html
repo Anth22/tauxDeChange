@@ -1,0 +1,9 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>{{libelleChange}}</mat-label>
+        <input matInput type="text" #required minlength="1" maxlength="10" size="12" placeholder="Saisir un montant">
+        <mat-error>This field is required</mat-error>
+        <mat-error>1 à 10 chiffres </mat-error>
+    </mat-form-field>
+    <!--div>Montant en {{deviseConvertie}} : {{montantConverti}} {{deviseConvertie}}</div-->
+</form>
