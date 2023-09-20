@@ -1,46 +1,51 @@
 
 <mat-tab-group>
     <mat-tab label="Taux de change"> 
-
-      <section class="example-section">
-          <mat-button-toggle-group name="fontStyle" aria-label="Choisir la monnaie à convertir" >
-              <mat-button-toggle value="EUR" checked="true" (change)="toggle(devise.value)" #devise>EUR</mat-button-toggle>
-              <mat-button-toggle value="USD" (change)="toggle(devise2.value)" #devise2>USD</mat-button-toggle>
-              </mat-button-toggle-group>
+      <h3 style="color: coral;margin: 1%;">Convertissez des EURO en USD au taux de change du marché </h3>
+      <section class="section">
+            <mat-button-toggle-group style="width:60vw; display: flex;margin-right: auto;margin-left: auto;" name="fontStyle" aria-label="Choisir la monnaie à convertir" >
+              <mat-button-toggle style="width:100%;" value="EUR" (change)="toggle(devise.value)" #devise>EUR</mat-button-toggle>
+              <mat-button-toggle style="width:100%" value="USD" checked="true" (change)="toggle(devise2.value)" #devise2>USD</mat-button-toggle>
+            </mat-button-toggle-group>
       </section>
-
-      <!--app-display-page (testFrontEmitter)="onEmit($event)"></app-display-page-->
-      <mat-card class="tauxDeChange-card" style="display: inline-block;width: fit-content;">
+      <div class="centrageDeBloc">
+      <mat-card class="tauxDeChange-card" style="width: 49%;min-height: 20%;margin-right: auto;margin-left: auto;margin-bottom: 10px;margin-top: 10px;">
         <mat-card-header>
           <mat-card-subtitle>Taux de change {{libelleChange}} : </mat-card-subtitle>
-          <mat-card-title>{{tauxDeChange}}</mat-card-title>
+          <mat-card-title style="font-size: 2.5rem;color: blue;margin: 5%;">{{tauxDeChange}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <button mat-stroked-button color="primary" title="Rentrer manuellement un nouveau taux de change"
           (click)="changerDeTauxChecked=!changerDeTauxChecked">Changer de taux</button>
-          <app-input-field *ngIf="changerDeTauxChecked" [libelleChange]="libelleChange">
+          <app-input-field *ngIf="changerDeTauxChecked" [libelleChange]="libelleChange" [type]="'taux'" (valeurSaisie)="onEmitTaux($event)">
           </app-input-field>
-          <!--mat-divider></mat-divider-->
         </mat-card-content>
         <!--mat-card-actions>
           <button mat-button>LIKE</button>
         </mat-card-actions-->
-        <!--mat-card-footer>
-          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-        </mat-card-footer-->
+        <mat-card-footer>
+          <!--mat-progress-bar mode="indeterminate"></mat-progress-bar-->
+          <mat-divider style="width: 88%;margin-bottom: 10px;margin-top: 15px;margin-right: auto;margin-left: auto;"></mat-divider>
+          <div style="margin: 3%;color: rgb(158 149 149);">
+            <p> 1.000 EUR = {{tauxDeChange}} {{deviseConvertie}}</p>
+            <p>Taux de change moyen du marché à {{dateDernierTauxDeChange | date:'longTime'}}</p>
+          </div>
+        </mat-card-footer>
       </mat-card>      
-
-      <mat-card class="tauxDeChange-card" style="display: inline-block;width: fit-content;vertical-align: top;">
+      <mat-card class="tauxDeChange-card" style="width: 49%;min-height: 20%;margin-right: auto;margin-left: auto;margin-bottom: 10px;margin-top: 10px;">
         <mat-card-header style="margin-bottom: 5px;">
           <mat-card-subtitle>Convertir {{libelleChange}} : </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-            <app-input-field [libelleChange]="libelleChange"></app-input-field>
+            <app-input-field [libelleChange]="libelleChange" [type]="'montant'" (valeurSaisie)="onEmitMontant($event)"></app-input-field>
+            <mat-divider style="width: 88%;margin-bottom: 10px;margin-top: 15px;margin-right: auto;margin-left: auto;"></mat-divider>
+            <div>Résultat : {{montantConverti}} {{deviseConvertie}}</div>
         </mat-card-content>
-      </mat-card>      
+      </mat-card>    
+      </div>
     </mat-tab>
-    <mat-tab label="Convertir"> 
-        <app-input-field [libelleChange]="libelleChange"></app-input-field>
+    <mat-tab label="Suivre les derniers taux de change"> 
+        <app-tab-historique-des-taux></app-tab-historique-des-taux>
     </mat-tab>
 </mat-tab-group>
   

@@ -20,6 +20,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderComponent } from './header/header.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { TabHistoriqueDesTauxComponent } from './tab-historique-des-taux/tab-historique-des-taux.component';
 
 
 
@@ -29,7 +30,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     ConvertisseurMonetaireComponent,
     InputFieldComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    TabHistoriqueDesTauxComponent
   ],
   imports: [
     BrowserModule,

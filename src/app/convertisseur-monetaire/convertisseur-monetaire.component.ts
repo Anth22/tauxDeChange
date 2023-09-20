@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ConversionDeTauxService } from '../services/conversion-de-taux.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-convertisseur-monetaire',
@@ -7,20 +9,25 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
   styleUrls: ['./convertisseur-monetaire.component.css']
 })
 export class ConvertisseurMonetaireComponent {
-  tauxDeChange = 1.1 //définit le taux EUR/USD par défaut
+  tauxDeChange = 1.1//Observable<number>//1.1 //définit le taux EUR/USD par défaut
   montantConverti: number = 0
   convertEURtoUSDchecked : boolean = true;
-  libelleChange = "EUR/USD"
-  deviseConvertie = "USD"
+  libelleChange : string = "EUR/USD"
+  deviseConvertie : string = "USD"
   nouveauTaux : number = 0
   changerDeTauxChecked : boolean = false
+  public thePeriod: any;
+  public dateDernierTauxDeChange:Date = new Date() 
+
+  constructor(public conversionService :ConversionDeTauxService){}
+
   ngOnInit(){
     this.setTauxDeChange()
     this.montantConverti = 0
   }
 
+  /**Méthode pour mettre à jour la devise à convertir et le taux de change dans l'app */
   toggle(event: any){
-    console.log("= event.checked; : "+ JSON.stringify(event))
     this.libelleChange = "EUR/USD"
     this.deviseConvertie = "USD"
     this.tauxDeChange = 1.1;
@@ -30,6 +37,10 @@ export class ConvertisseurMonetaireComponent {
       this.libelleChange = "USD/EUR"
       this.deviseConvertie = "EUR"
     }
+    console.log("this.deviseConvertie 0 : "+ JSON.stringify(this.deviseConvertie))
+    console.log("this.tauxDeChange 0 : "+ JSON.stringify(this.tauxDeChange))
+    this.conversionService.devise$.next(this.deviseConvertie)
+    this.conversionService.updateTauxDeChangeAconvertir()
   }
 
   miseAjourDuTauxJournalie(){
@@ -43,17 +54,30 @@ export class ConvertisseurMonetaireComponent {
   }
 
   setTauxDeChange(){
-    setInterval(()=>{
+    /*this.conversionService.devise$.subscribe(value=>{
+      this.deviseConvertie = value
+    })*/
+
+    this.conversionService.tauxDeChange$.subscribe(value=>{
+      this.tauxDeChange = value
+    })
+
+    this.thePeriod = setInterval(()=>{
       let number = this.getRandomNumber(-0.05,0.05)
-      this.tauxDeChange = Math.round(this.tauxDeChange + this.getRandomNumber(-0.05,0.05)*100)/100;
-      console.log("this.tauxDeChange : "+number)
-    }, 30000)
+      this.tauxDeChange = Math.round((this.tauxDeChange + number)*1000)/1000;
+      this.dateDernierTauxDeChange = new Date()
+    }, 5000)
   }
 
-  conversionEURtoUSD(event:any){
-    //console.log("this.montantConverti : "+this.montantConverti)
-    //console.log("this.event : "+JSON.stringify(event.target.value))
-    this.montantConverti = event.target.value
-    this.montantConverti *= this.tauxDeChange
+  onEmitMontant(valeurSaisie:number){
+    this.montantConverti = Math.round(this.tauxDeChange * valeurSaisie *100)/100
+  }
+
+  onEmitTaux(valeurSaisie:number){
+    this.tauxDeChange = valeurSaisie
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.thePeriod);
   }
 }
