@@ -23,6 +23,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TabHistoriqueDesTauxComponent } from './tab-historique-des-taux/tab-historique-des-taux.component';
 import { MatTableModule } from '@angular/material/table';
 import { PageTitleComponent } from './page-title/page-title.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
@@ -52,7 +53,8 @@ import { PageTitleComponent } from './page-title/page-title.component';
     MatToolbarModule,
     MatTabsModule,
     MatButtonToggleModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

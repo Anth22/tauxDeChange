@@ -11,13 +11,19 @@
       </section>
       <div class="centrageDeBloc">
       <mat-card class="tauxDeChange-card" style="width: 49%;min-height: 20%;margin-right: auto;margin-left: auto;margin-bottom: 10px;margin-top: 10px;">
-        <mat-card-header>
+        <mat-card-header style="width: 100%;">
           <mat-card-subtitle>Taux de change {{libelleChange}} : </mat-card-subtitle>
-          <mat-card-title style="font-size: 2.5rem;color: blue;margin: 5%;">{{tauxDeChange}}</mat-card-title>
+          <mat-card-title style="font-size: 2.5rem;color: blue;margin: 5%;display: inline-block;">{{tauxDeChange}}</mat-card-title>
+            <mat-card-subtitle style="font-size: 1rem;color: blue;display: inline-block;">{{typeDeTauxAffiche}}
+              <!--mat-checkbox [(ngModel)]="tauxFixeActive">Activer taux fixe {{typeDeTauxAffiche}}</mat-checkbox-->
+            </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <button mat-stroked-button color="primary" title="Rentrer manuellement un nouveau taux de change"
-          (click)="changerDeTauxChecked=!changerDeTauxChecked">Changer de taux</button>
+          <section>
+            <mat-checkbox [(ngModel)]="tauxFixeActive" color="primary" style="margin-right: 1%;">Activer taux fixe</mat-checkbox>
+            <button *ngIf="tauxFixeActive" mat-stroked-button color="primary" title="Rentrer manuellement un nouveau taux de change"
+              (click)="changerDeTauxChecked=!changerDeTauxChecked">Changer de taux</button>
+          </section>
           <app-input-field *ngIf="changerDeTauxChecked" [deviseSaisie]="libelleChange" [disableValue]="false" [TypeDeForme]="'taux'" (valeurSaisie)="onEmitTaux($event)">
           </app-input-field>
         </mat-card-content>
@@ -25,7 +31,6 @@
           <button mat-button>LIKE</button>
         </mat-card-actions-->
         <mat-card-footer>
-          <!--mat-progress-bar mode="indeterminate"></mat-progress-bar-->
           <mat-divider style="width: 88%;margin-bottom: 10px;margin-top: 15px;margin-right: auto;margin-left: auto;"></mat-divider>
           <div style="margin: 3%;color: rgb(158 149 149);">
             <p> 1.000 {{this.deviseDorigine}} = {{tauxDeChange}} {{deviseConvertie}}</p>

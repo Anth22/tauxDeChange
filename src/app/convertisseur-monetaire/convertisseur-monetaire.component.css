@@ -7,3 +7,7 @@
 .section {
     margin-top: 1%;
 }
+
+:host .mat-mdc-card-header > div {
+    width: 100%;
+}

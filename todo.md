@@ -25,3 +25,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+Amélioration technique non géré par l'app à cause du temps : 
+- Gestion des valeurs rentrés dans les champs input avec un form group (utilisation des valideurs)
+- Empécher l'utilisateur de rentrer des caractères spéciaux et des lettres dans les champs
+- Vérifier que les champ de saisi corresponde bien à l'objet saisi (taux et montant)
+- Encapsulation des blocs (mat card) dans un composant plus générique pour standardiser l'affichage
+- Coder les pages accessible via le footer (A propos et Terms)
