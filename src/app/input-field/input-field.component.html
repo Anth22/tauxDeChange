@@ -1,9 +1,11 @@
 <form class="example-form">
-    <mat-form-field class="example-full-width">
-        <mat-label>{{libelleChange}}</mat-label>
-        <input matInput type="text" #required minlength="1" maxlength="10" size="12" placeholder="Saisir un {{type}}" (input)="conversionEURtoUSD($event)">
+    <mat-form-field class="example-full-width" appearance="outline" hintLabel="Max 10 chiffres">
+        <mat-label>{{deviseSaisie}}</mat-label>
+        <input matInput  #input type="text" step="{{step}}" min="0" #required [disabled]="disableValue" minlength="1" maxlength="10" size="10" value="{{deviseCalcule}}" placeholder="Saisir un {{TypeDeForme}}" (keyup)="conversionEURtoUSD($event)">
+        <!--button (click)="conversionEURtoUSD($event)">Valider</-->
+        <!--div>valeurSaisie : {{valeurSaisie | json}}</div-->
+        <mat-hint align="end">{{input.value.length}}/10</mat-hint>
         <mat-error>This field is required</mat-error>
         <mat-error>1 à 10 chiffres </mat-error>
     </mat-form-field>
-    <!--div>Montant en {{deviseConvertie}} : {{montantConverti}} {{deviseConvertie}}</div-->
 </form>

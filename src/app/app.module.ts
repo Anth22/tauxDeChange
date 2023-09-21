@@ -21,6 +21,8 @@ import { HeaderComponent } from './header/header.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { TabHistoriqueDesTauxComponent } from './tab-historique-des-taux/tab-historique-des-taux.component';
+import { MatTableModule } from '@angular/material/table';
+import { PageTitleComponent } from './page-title/page-title.component';
 
 
 
@@ -31,7 +33,8 @@ import { TabHistoriqueDesTauxComponent } from './tab-historique-des-taux/tab-his
     InputFieldComponent,
     FooterComponent,
     HeaderComponent,
-    TabHistoriqueDesTauxComponent
+    TabHistoriqueDesTauxComponent,
+    PageTitleComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { TabHistoriqueDesTauxComponent } from './tab-historique-des-taux/tab-his
     MatSlideToggleModule,
     MatToolbarModule,
     MatTabsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

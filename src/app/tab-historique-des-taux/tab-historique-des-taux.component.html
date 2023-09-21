@@ -1,3 +1,36 @@
-<p>Tableau historique des taux</p>
+<app-page-title [message]="'Tableau des historiques de taux'"></app-page-title>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- deviseDorigine Column -->
+    <ng-container matColumnDef="deviseDorigine">
+        <th mat-header-cell *matHeaderCellDef>Devise d'origine</th>
+        <td mat-cell *matCellDef="let element">{{element.deviseDorigine}}</td>
+    </ng-container>
 
-<p> to do : tab usd=> eur et inversement</p>
+    <!-- deviseCalcule Column -->
+    <ng-container matColumnDef="deviseCalcule">
+        <th mat-header-cell *matHeaderCellDef>Devise calculé</th>
+        <td mat-cell *matCellDef="let element">{{element.deviseCalcule}}</td>
+    </ng-container>
+    <!-- tauxDeChange Column -->
+    <ng-container matColumnDef="tauxDeChange">
+        <th mat-header-cell *matHeaderCellDef>Taux</th>
+        <td mat-cell *matCellDef="let element">{{element.tauxDeChange}}</td>
+    </ng-container>
+    <!-- tauxDeChangeSaisi Column -->
+    <ng-container matColumnDef="tauxDeChangeSaisi">
+        <th mat-header-cell *matHeaderCellDef>Taux saisi</th>
+        <td mat-cell *matCellDef="let element">{{element.tauxDeChangeSaisi}}</td>
+    </ng-container>
+    <!-- valeurInitial Column -->
+    <ng-container matColumnDef="valeurInitial">
+        <th mat-header-cell *matHeaderCellDef>Valeur initiale</th>
+        <td mat-cell *matCellDef="let element">{{element.valeurInitial}}</td>
+    </ng-container>
+    <!-- valeurCalculee Column -->
+    <ng-container matColumnDef="valeurCalcule">
+        <th mat-header-cell *matHeaderCellDef>Valeur calculée</th>
+        <td mat-cell *matCellDef="let element">{{element.valeurCalcule}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

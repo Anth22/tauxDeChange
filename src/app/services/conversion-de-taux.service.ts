@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HistoriqueDesTaux } from '../objects/HistoriqueDesTaux';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ export class ConversionDeTauxService {
   * behaviorSubject de type nombre qui contient l'information sur le taux à conevrtir
   */
   devise$: BehaviorSubject<string> = new BehaviorSubject("USD");
+  historiqueDesTaux$ : BehaviorSubject<HistoriqueDesTaux[]> = new BehaviorSubject<HistoriqueDesTaux[]>([]);
 
   /**
   * behaviorSubject de type nombre qui contient l'information sur la valeur du taux de change
